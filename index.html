@@ -92,28 +92,116 @@
             <img src="icons/recycle-bin-empty.ico" alt="Recycle Bin">
             <span>Recycle Bin</span>
         </div>
+        <div class="desktop-icon" data-target="paint-window">
+            <img src="icons/paint.png" alt="Paint">
+            <span>Paint</span>
+        </div>
+        <div class="desktop-icon" data-target="pacman-window">
+            <img src="icons/pacman.png" alt="Pacman">
+            <span>Pacman</span>
+        </div>
 
         <!-- Terminal Window -->
-        <div id="terminal-window" class="window">
+        <div class="window" id="terminal-window"
+            style="display: none; width: 800px; height: 500px; top: 50px; left: 50px;">
             <div class="window-header">
                 <div class="window-title">
                     <img src="icons/terminal.ico" alt="Icon">
-                    sreyas@portfolio: ~
+                    <span>Sreyas Portfolio - Terminal</span>
                 </div>
                 <div class="window-controls">
-                    <button class="window-btn minimize-btn">_</button>
-                    <button class="window-btn maximize-btn">[]</button>
-                    <button class="window-btn close-btn">X</button>
+                    <button class="minimize-btn">_</button>
+                    <button class="maximize-btn">[ ]</button>
+                    <button class="close-btn">X</button>
                 </div>
             </div>
-            <div class="window-content">
-                <div class="terminal-container">
-                    <div class="terminal-body" id="terminal-body">
-                        <div class="output" id="output"></div>
-                        <div class="input-line">
-                            <span class="prompt">sreyas@portfolio:~$</span>
-                            <input type="text" id="command-input" autocomplete="off" autofocus>
-                        </div>
+            <div class="window-content" id="terminal-body">
+                <div id="output"></div>
+                <div class="input-line">
+                    <span class="prompt">sreyas@portfolio:~$</span>
+                    <input type="text" id="command-input" autocomplete="off" autofocus>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pacman Window -->
+        <div class="window" id="pacman-window"
+            style="display: none; width: 440px; height: 520px; top: 100px; left: 150px;">
+            <div class="window-header">
+                <div class="window-title">
+                    <img src="icons/pacman.png" alt="Icon">
+                    <span>Pacman</span>
+                </div>
+                <div class="window-controls">
+                    <button class="minimize-btn">_</button>
+                    <button class="maximize-btn">□</button>
+                    <button class="close-btn">X</button>
+                </div>
+            </div>
+            <div class="window-content"
+                style="background-color: black; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div id="pacman-score"
+                    style="color: white; font-family: 'Courier New', Courier, monospace; font-size: 20px; margin-bottom: 10px;">
+                    Score: 0</div>
+                <canvas id="pacman-canvas" width="400" height="400"
+                    style="border: 2px solid blue; background-color: black;"></canvas>
+                <button id="start-pacman" style="margin-top: 10px; padding: 5px 10px; cursor: pointer;">Start
+                    Game</button>
+            </div>
+        </div>
+
+        <!-- Paint Window -->
+        <div class="window" id="paint-window"
+            style="display: none; width: 620px; height: 500px; top: 50px; left: 200px;">
+            <div class="window-header">
+                <div class="window-title">
+                    <img src="icons/paint.png" alt="Icon">
+                    <span>Paint</span>
+                </div>
+                <div class="window-controls">
+                    <button class="minimize-btn">_</button>
+                    <button class="maximize-btn">□</button>
+                    <button class="close-btn">X</button>
+                </div>
+            </div>
+            <div class="window-content" style="background-color: #C0C0C0; display: flex; flex-direction: column;">
+                <!-- Toolbar -->
+                <div class="paint-toolbar">
+                    <div class="paint-tools">
+                        <button id="paint-tool-brush" class="paint-tool active" title="Brush">🖌️</button>
+                        <button id="paint-tool-eraser" class="paint-tool" title="Eraser">🧼</button>
+                        <button id="paint-tool-clear" class="paint-tool" title="Clear Canvas">🗑️</button>
+                    </div>
+                    <div class="paint-size">
+                        <label for="paint-brush-size" style="font-size: 12px;">Size:</label>
+                        <input type="range" id="paint-brush-size" min="1" max="20" value="5">
+                    </div>
+                </div>
+
+                <div style="display: flex; flex: 1; padding: 5px; gap: 5px;">
+                    <!-- Color Palette -->
+                    <div class="paint-palette">
+                        <div class="paint-color active" style="background-color: #000000;" data-color="#000000"></div>
+                        <div class="paint-color" style="background-color: #808080;" data-color="#808080"></div>
+                        <div class="paint-color" style="background-color: #800000;" data-color="#800000"></div>
+                        <div class="paint-color" style="background-color: #808000;" data-color="#808000"></div>
+                        <div class="paint-color" style="background-color: #008000;" data-color="#008000"></div>
+                        <div class="paint-color" style="background-color: #008080;" data-color="#008080"></div>
+                        <div class="paint-color" style="background-color: #000080;" data-color="#000080"></div>
+                        <div class="paint-color" style="background-color: #800080;" data-color="#800080"></div>
+                        <div class="paint-color" style="background-color: #FFFFFF;" data-color="#FFFFFF"></div>
+                        <div class="paint-color" style="background-color: #C0C0C0;" data-color="#C0C0C0"></div>
+                        <div class="paint-color" style="background-color: #FF0000;" data-color="#FF0000"></div>
+                        <div class="paint-color" style="background-color: #FFFF00;" data-color="#FFFF00"></div>
+                        <div class="paint-color" style="background-color: #00FF00;" data-color="#00FF00"></div>
+                        <div class="paint-color" style="background-color: #00FFFF;" data-color="#00FFFF"></div>
+                        <div class="paint-color" style="background-color: #0000FF;" data-color="#0000FF"></div>
+                        <div class="paint-color" style="background-color: #FF00FF;" data-color="#FF00FF"></div>
+                    </div>
+
+                    <!-- Canvas Area -->
+                    <div class="paint-canvas-container">
+                        <canvas id="paint-canvas"></canvas>
                     </div>
                 </div>
             </div>
@@ -238,7 +326,9 @@
     </div>
 
     <script src="audio-manager.js"></script>
-    <script src="data.js"></script>
+    <script src="pacman.js"></script>
+    <script src="paint.js"></script>
+    <script src="script.js"></script>
     <script src="window-manager.js"></script>
     <script src="script.js"></script>
 </body>
