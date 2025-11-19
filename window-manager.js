@@ -243,6 +243,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (actionTurnOff) {
         actionTurnOff.addEventListener('click', () => {
+            // Play shutdown sound
+            if (window.AudioManager) {
+                window.AudioManager.playShutdownSound();
+            }
+
             // Turn Off Animation
             document.body.innerHTML = '';
             document.body.style.backgroundColor = 'black';

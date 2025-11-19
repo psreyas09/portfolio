@@ -101,6 +101,11 @@ window.addEventListener('DOMContentLoaded', () => {
             if (loginScreen) loginScreen.style.display = 'none';
             if (desktop) desktop.style.display = 'flex';
 
+            // Play startup sound
+            if (window.AudioManager) {
+                window.AudioManager.playStartupSound();
+            }
+
             // Initialize terminal
             const terminalBody = document.getElementById('terminal-body');
             if (terminalBody) {
