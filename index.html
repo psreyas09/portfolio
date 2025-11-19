@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sreyas Portfolio | Terminal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="start-menu.css">
+    <link rel="stylesheet" href="xp-screens.css">
+</head>
+
+<body>
+    <!-- Boot Screen -->
+    <div id="boot-screen">
+        <div class="boot-content">
+            <img src="icons/boot-logo.png" alt="Windows XP" class="boot-logo">
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" style="display: none;">
+        <div class="login-container">
+            <div class="login-left">
+                <img src="icons/boot-logo.png" alt="Windows XP" class="login-logo">
+                <div class="login-text">
+                    To begin, click your user name
+                </div>
+            </div>
+            <div class="login-divider"></div>
+            <div class="login-right">
+                <div class="user-account" id="login-btn">
+                    <img src="icons/user-avatar.png" alt="User" class="user-avatar">
+                    <div class="user-info">
+                        <div class="user-name">Sreyas</div>
+                        <div class="user-status">Type your password</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="login-footer">
+            <div class="footer-btn">
+                <img src="icons/shutdown.png" alt="Turn off">
+                <span>Turn off computer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shutdown Screen -->
+    <div id="shutdown-overlay" style="display: none;">
+        <div class="shutdown-dialog">
+            <div class="shutdown-header">
+                <span>Turn off computer</span>
+            </div>
+            <div class="shutdown-body">
+                <div class="shutdown-option" id="action-standby">
+                    <div class="shutdown-icon standby"></div>
+                    <span>Standby</span>
+                </div>
+                <div class="shutdown-option" id="action-turnoff">
+                    <div class="shutdown-icon turnoff"></div>
+                    <span>Turn Off</span>
+                </div>
+                <div class="shutdown-option" id="action-restart">
+                    <div class="shutdown-icon restart"></div>
+                    <span>Restart</span>
+                </div>
+            </div>
+            <div class="shutdown-footer">
+                <button class="cancel-btn" id="cancel-shutdown">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="desktop" style="display: none;">
+        <div class="desktop-icon" data-target="terminal-window">
+            <img src="icons/terminal.ico" alt="Terminal">
+            <span>Terminal</span>
+        </div>
+        <div class="desktop-icon" data-target="about-window">
+            <img src="icons/my-computer.ico" alt="My Computer">
+            <span>My Computer</span>
+        </div>
+        <div class="desktop-icon" data-target="recycle-bin-window">
+            <img src="icons/recycle-bin-empty.ico" alt="Recycle Bin">
+            <span>Recycle Bin</span>
+        </div>
+
+        <!-- Terminal Window -->
+        <div id="terminal-window" class="window">
+            <div class="window-header">
+                <div class="window-title">
+                    <img src="icons/terminal.ico" alt="Icon">
+                    sreyas@portfolio: ~
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize-btn">_</button>
+                    <button class="window-btn maximize-btn">[]</button>
+                    <button class="window-btn close-btn">X</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="terminal-container">
+                    <div class="terminal-body" id="terminal-body">
+                        <div class="output" id="output"></div>
+                        <div class="input-line">
+                            <span class="prompt">sreyas@portfolio:~$</span>
+                            <input type="text" id="command-input" autocomplete="off" autofocus>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Computer Window -->
+        <div id="about-window" class="window" style="display: none; top: 80px; left: 80px;">
+            <div class="window-header">
+                <div class="window-title">
+                    <img src="icons/my-computer.ico" alt="Icon">
+                    My Computer
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize-btn">_</button>
+                    <button class="window-btn maximize-btn">[]</button>
+                    <button class="window-btn close-btn">X</button>
+                </div>
+            </div>
+            <div class="window-content" style="background: white; padding: 20px; overflow-y: auto;">
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div style="text-align: center; width: 100px;">
+                        <img src="icons/folder.ico" style="width: 48px; height: 48px;" alt="Drive">
+                        <div style="font-size: 12px; margin-top: 5px;">Local Disk (C:)</div>
+                    </div>
+                    <div style="text-align: center; width: 100px;">
+                        <img src="icons/folder.ico" style="width: 48px; height: 48px;" alt="Drive">
+                        <div style="font-size: 12px; margin-top: 5px;">Portfolio (D:)</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px;">
+                    <h3>System Information</h3>
+                    <p><strong>OS:</strong> Sreyas XP Professional</p>
+                    <p><strong>Processor:</strong> Intel Core i7</p>
+                    <p><strong>Memory:</strong> 16GB RAM</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recycle Bin Window -->
+        <div id="recycle-bin-window" class="window" style="display: none; top: 110px; left: 110px;">
+            <div class="window-header">
+                <div class="window-title">
+                    <img src="icons/recycle-bin-empty.ico" alt="Icon">
+                    Recycle Bin
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize-btn">_</button>
+                    <button class="window-btn maximize-btn">[]</button>
+                    <button class="window-btn close-btn">X</button>
+                </div>
+            </div>
+            <div class="window-content"
+                style="background: white; padding: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                <img src="icons/recycle-bin-empty.ico" style="width: 64px; height: 64px; opacity: 0.5;" alt="Empty">
+                <p style="margin-top: 10px; color: #666;">The Recycle Bin is empty.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="start-menu" style="display: none;">
+        <div class="start-header">
+            <img src="icons/folder.ico" alt="User" class="user-icon">
+            <span class="user-name">Sreyas</span>
+        </div>
+        <div class="start-body">
+            <div class="start-column left">
+                <div class="start-item" onclick="window.open('https://github.com/psreyas09', '_blank')">
+                    <img src="icons/folder.ico" alt="GitHub">
+                    <span>GitHub</span>
+                </div>
+                <div class="start-item" onclick="window.open('https://linkedin.com/in/psreyas09', '_blank')">
+                    <img src="icons/folder.ico" alt="LinkedIn">
+                    <span>LinkedIn</span>
+                </div>
+                <div class="separator"></div>
+                <div class="start-item" data-action="all-programs">
+                    <span>All Programs</span>
+                    <span class="arrow">▶</span>
+                </div>
+            </div>
+            <div class="start-column right">
+                <div class="start-item" data-target="about-window">
+                    <img src="icons/my-computer.ico" alt="My Computer">
+                    <span>My Computer</span>
+                </div>
+                <div class="start-item" data-target="recycle-bin-window">
+                    <img src="icons/recycle-bin-empty.ico" alt="Recycle Bin">
+                    <span>Recycle Bin</span>
+                </div>
+                <div class="start-item" data-target="terminal-window">
+                    <img src="icons/terminal.ico" alt="Terminal">
+                    <span>Terminal</span>
+                </div>
+            </div>
+        </div>
+        <div class="start-footer">
+            <div class="footer-button" id="logout-btn">
+                <img src="icons/logoff.png" alt="Log Off">
+                <span>Log Off</span>
+            </div>
+            <div class="footer-button" id="shutdown-btn">
+                <img src="icons/shutdown.png" alt="Turn Off">
+                <span>Turn Off Computer</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="taskbar">
+        <div id="start-button">
+            <img src="icons/start-button.png" alt="Logo">
+            start
+        </div>
+        <div class="taskbar-items">
+            <div class="taskbar-item active" id="task-terminal-window" data-target="terminal-window">
+                <img src="icons/terminal.ico" alt="Icon">
+                sreyas@portfolio
+            </div>
+        </div>
+        <div id="system-tray">
+            <span id="clock">12:00 PM</span>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="window-manager.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
