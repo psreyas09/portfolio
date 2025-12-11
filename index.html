@@ -25,6 +25,22 @@
         </div>
     </div>
 
+    <!-- BSOD Screen -->
+    <div id="bsod" style="display: none;">
+        <div class="bsod-content">
+            <p>A problem has been detected and windows has been shut down to prevent damage to your computer.</p>
+            <p>If this is the first time you've seen this stop error screen, restart your computer. If this screen
+                appears again, follow these steps:</p>
+            <p>Check to make sure any new hardware or software is properly installed. If this is a new installation, ask
+                your hardware or software manufacturer for any windows updates you might need.</p>
+            <p>If problems continue, disable or remove any newly installed hardware or software. Disable BIOS memory
+                options such as caching or shadowing. If you need to use safe mode to remove or disable components,
+                restart your computer, press F8 to select Advanced Startup Options, and then select Safe Mode.</p>
+            <p>Technical information:</p>
+            <p>*** STOP: 0x000000FE (0x00000008, 0x000000006, 0x00000009, 0x847075cc)</p>
+        </div>
+    </div>
+
     <!-- Login Screen -->
     <div id="login-screen" style="display: none;">
         <div class="login-container">
@@ -84,7 +100,7 @@
             <img src="icons/terminal.ico" alt="Terminal">
             <span>Terminal</span>
         </div>
-        <div class="desktop-icon" data-target="about-window">
+        <div class="desktop-icon" data-target="explorer-window">
             <img src="icons/my-computer.ico" alt="My Computer">
             <span>My Computer</span>
         </div>
@@ -99,6 +115,10 @@
         <div class="desktop-icon" data-target="pacman-window">
             <img src="icons/pacman.png" alt="Pacman">
             <span>Pacman</span>
+        </div>
+        <div class="desktop-icon" data-target="notepad-window">
+            <img src="icons/notepad.png" alt="Notepad">
+            <span>Notepad</span>
         </div>
 
         <!-- Terminal Window -->
@@ -207,58 +227,412 @@
             </div>
         </div>
 
-        <!-- My Computer Window -->
-        <div id="about-window" class="window" style="display: none; top: 80px; left: 80px;">
+        <!-- Calculator Window -->
+        <div id="calc-window" class="window"
+            style="display: none; top: 150px; left: 150px; width: 226px; height: auto;">
             <div class="window-header">
                 <div class="window-title">
-                    <img src="icons/my-computer.ico" alt="Icon">
-                    My Computer
+                    <img src="icons/calculator.png" alt="Icon">
+                    <span>Calculator</span>
                 </div>
                 <div class="window-controls">
                     <button class="window-btn minimize-btn">_</button>
-                    <button class="window-btn maximize-btn">[]</button>
                     <button class="window-btn close-btn">X</button>
                 </div>
             </div>
-            <div class="window-content" style="background: white; padding: 20px; overflow-y: auto;">
-                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                    <div style="text-align: center; width: 100px;">
-                        <img src="icons/folder.ico" style="width: 48px; height: 48px;" alt="Drive">
-                        <div style="font-size: 12px; margin-top: 5px;">Local Disk (C:)</div>
-                    </div>
-                    <div style="text-align: center; width: 100px;">
-                        <img src="icons/folder.ico" style="width: 48px; height: 48px;" alt="Drive">
-                        <div style="font-size: 12px; margin-top: 5px;">Portfolio (D:)</div>
-                    </div>
+
+            <div class="window-menu-bar" style="border-bottom: 0;">
+                <span style="padding: 2px 5px;">Edit</span>
+                <span style="padding: 2px 5px;">View</span>
+                <span style="padding: 2px 5px;">Help</span>
+            </div>
+
+            <div class="window-content" style="padding: 10px; background: #D4D0C8;">
+                <input type="text" id="calc-display" value="0" readonly
+                    style="width: 100%; text-align: right; margin-bottom: 10px; padding: 2px; font-family: 'Tahoma', sans-serif; font-size: 16px; margin-right: 5px;">
+
+                <div class="calc-buttons">
+                    <!-- Row 1 -->
+                    <button class="calc-btn text-red">Backspace</button>
+                    <button class="calc-btn text-red">CE</button>
+                    <button class="calc-btn text-red">C</button>
+
+                    <!-- Row 2 -->
+                    <button class="calc-btn text-red">MC</button>
+                    <button class="calc-btn">7</button>
+                    <button class="calc-btn">8</button>
+                    <button class="calc-btn">9</button>
+                    <button class="calc-btn text-blue">/</button>
+                    <button class="calc-btn">sqrt</button>
+
+                    <!-- Row 3 -->
+                    <button class="calc-btn text-red">MR</button>
+                    <button class="calc-btn">4</button>
+                    <button class="calc-btn">5</button>
+                    <button class="calc-btn">6</button>
+                    <button class="calc-btn text-blue">*</button>
+                    <button class="calc-btn">%</button>
+
+                    <!-- Row 4 -->
+                    <button class="calc-btn text-red">MS</button>
+                    <button class="calc-btn">1</button>
+                    <button class="calc-btn">2</button>
+                    <button class="calc-btn">3</button>
+                    <button class="calc-btn text-blue">-</button>
+                    <button class="calc-btn">1/x</button>
+
+                    <!-- Row 5 -->
+                    <button class="calc-btn text-red">M+</button>
+                    <button class="calc-btn">0</button>
+                    <button class="calc-btn">+/-</button>
+                    <button class="calc-btn">.</button>
+                    <button class="calc-btn text-blue">+</button>
+                    <button class="calc-btn text-blue">=</button>
                 </div>
-                <div style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px;">
-                    <h3>System Information</h3>
-                    <p><strong>OS:</strong> Sreyas XP Professional</p>
-                    <p><strong>Processor:</strong> Intel Core i7</p>
-                    <p><strong>Memory:</strong> 16GB RAM</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Control Panel Window -->
+    <div id="cp-window" class="window" style="display: none; top: 120px; left: 120px; width: 600px; height: 450px;">
+        <div class="window-header">
+            <div class="window-title">
+                <img src="icons/control-panel.png" alt="Icon">
+                <span>Control Panel</span>
+            </div>
+            <div class="window-controls">
+                <button class="window-btn minimize-btn">_</button>
+                <button class="window-btn close-btn">X</button>
+            </div>
+        </div>
+
+        <div class="window-menu-bar">
+            <div class="notepad-menu-item">File</div>
+            <div class="notepad-menu-item">Edit</div>
+            <div class="notepad-menu-item">View</div>
+            <div class="notepad-menu-item">Favorites</div>
+            <div class="notepad-menu-item">Tools</div>
+            <div class="notepad-menu-item">Help</div>
+        </div>
+
+        <div class="window-content toolbar-container">
+            <div class="explorer-toolbar">
+                <div class="toolbar-btn" title="Back">
+                    <div class="toolbar-icon back-icon">⬅</div> <span>Back</span>
                 </div>
             </div>
         </div>
 
-        <!-- Recycle Bin Window -->
-        <div id="recycle-bin-window" class="window" style="display: none; top: 110px; left: 110px;">
-            <div class="window-header">
-                <div class="window-title">
-                    <img src="icons/recycle-bin-empty.ico" alt="Icon">
-                    Recycle Bin
+        <div class="window-content"
+            style="display: flex; flex-direction: row; flex-grow: 1; background-color: #fff; overflow: hidden;">
+            <!-- Sidebar -->
+            <div class="explorer-sidebar"
+                style="width: 200px; padding: 10px; background: linear-gradient(to bottom, #7ba2e7, #6375d6);">
+                <div class="sidebar-box">
+                    <div class="sidebar-header">Control Panel</div>
+                    <div class="sidebar-content">
+                        <div class="sidebar-item">Switch to Classic View</div>
+                    </div>
                 </div>
-                <div class="window-controls">
-                    <button class="window-btn minimize-btn">_</button>
-                    <button class="window-btn maximize-btn">[]</button>
-                    <button class="window-btn close-btn">X</button>
+                <div class="sidebar-box">
+                    <div class="sidebar-header">See Also</div>
+                    <div class="sidebar-content">
+                        <div class="sidebar-item">Windows Update</div>
+                        <div class="sidebar-item">Help and Support</div>
+                    </div>
                 </div>
             </div>
-            <div class="window-content"
-                style="background: white; padding: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-                <img src="icons/recycle-bin-empty.ico" style="width: 64px; height: 64px; opacity: 0.5;" alt="Empty">
-                <p style="margin-top: 10px; color: #666;">The Recycle Bin is empty.</p>
+
+            <!-- Main Grid -->
+            <div class="cp-grid"
+                style="flex-grow: 1; padding: 20px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; overflow-y: auto;">
+                <div class="cp-item" onclick="alert('Appearance and Themes settings are restricted.')">
+                    <img src="icons/paint.png" alt="Display">
+                    <div class="cp-text">
+                        <h3>Appearance and Themes</h3>
+                        <p>Change the computer's theme, desktop background, screen saver, and display settings.</p>
+                    </div>
+                </div>
+                <div class="cp-item" onclick="alert('Network settings are turned off.')">
+                    <img src="icons/my-computer.ico" alt="Network">
+                    <div class="cp-text">
+                        <h3>Network and Internet Connections</h3>
+                        <p>Connect to the Internet or other computers/networks.</p>
+                    </div>
+                </div>
+                <div class="cp-item" onclick="alert('Add/Remove Programs is not simulated.')">
+                    <img src="icons/calculator.png" alt="Programs">
+                    <div class="cp-text">
+                        <h3>Add or Remove Programs</h3>
+                        <p>Install or remove programs and Windows components.</p>
+                    </div>
+                </div>
+                <div class="cp-item" onclick="alert('User Accounts management is restricted.')">
+                    <img src="icons/user-avatar.png" alt="Users">
+                    <div class="cp-text">
+                        <h3>User Accounts</h3>
+                        <p>Change user account settings and passwords.</p>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Explorer Window (Renamed from My Computer) -->
+    <div id="explorer-window" class="window" style="display: none; top: 80px; left: 80px; width: 800px; height: 600px;">
+        <div class="window-header">
+            <div class="window-title">
+                <img src="icons/my-computer.ico" alt="Icon">
+                <span id="explorer-title">My Computer</span>
+            </div>
+            <div class="window-controls">
+                <button class="window-btn minimize-btn">_</button>
+                <button class="window-btn maximize-btn">[]</button>
+                <button class="window-btn close-btn">X</button>
+            </div>
+        </div>
+
+        <!-- Menu Bar -->
+        <!-- Menu Bar -->
+        <div class="notepad-menu-bar explorer-menu-bar">
+            <div class="notepad-menu-item">
+                <span>File</span>
+                <div class="notepad-dropdown">
+                    <div class="notepad-dropdown-item" data-action="exp-close">Close</div>
+                </div>
+            </div>
+            <div class="notepad-menu-item">
+                <span>Edit</span>
+                <div class="notepad-dropdown">
+                    <div class="notepad-dropdown-item" data-action="exp-copy">Copy</div>
+                    <div class="notepad-dropdown-item" data-action="exp-paste">Paste</div>
+                    <div class="notepad-dropdown-separator"></div>
+                    <div class="notepad-dropdown-item" data-action="exp-selall">Select All</div>
+                </div>
+            </div>
+            <div class="notepad-menu-item">
+                <span>View</span>
+                <div class="notepad-dropdown">
+                    <div class="notepad-dropdown-item" data-action="exp-refresh">Refresh</div>
+                </div>
+            </div>
+            <div class="notepad-menu-item">
+                <span>Favorites</span>
+                <div class="notepad-dropdown">
+                    <div class="notepad-dropdown-item" data-action="exp-fav">Add to Favorites</div>
+                </div>
+            </div>
+            <div class="notepad-menu-item">
+                <span>Tools</span>
+                <div class="notepad-dropdown">
+                    <div class="notepad-dropdown-item" data-action="exp-opt">Folder Options...</div>
+                </div>
+            </div>
+            <div class="notepad-menu-item">
+                <span>Help</span>
+                <div class="notepad-dropdown">
+                    <div class="notepad-dropdown-item" data-action="exp-about">About Windows</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="explorer-toolbar">
+            <div class="toolbar-btn" id="exp-back" title="Back">
+                <div class="toolbar-icon back-icon">⬅</div> <span>Back</span>
+            </div>
+            <div class="toolbar-btn" id="exp-forward" title="Forward">
+                <div class="toolbar-icon fwd-icon">➡</div>
+            </div>
+            <div class="toolbar-btn" id="exp-up" title="Up">
+                <div class="toolbar-icon up-icon">⬆</div>
+            </div>
+            <div class="toolbar-separator"></div>
+            <div class="toolbar-btn" id="exp-search" title="Search">
+                <div class="toolbar-icon search-icon">🔍</div> <span>Search</span>
+            </div>
+            <div class="toolbar-btn" id="exp-folders" title="Folders">
+                <div class="toolbar-icon folders-icon">📂</div> <span>Folders</span>
+            </div>
+
+            <div style="flex-grow: 1; display: flex; align-items: center; margin-left: 10px;">
+                <span style="font-size: 11px; margin-right: 5px; color: #666;">Address</span>
+                <input type="text" id="explorer-address"
+                    style="flex-grow: 1; border: 1px solid #7F9DB9; padding: 2px; font-size: 11px;">
+                <div class="go-btn">Go</div>
+            </div>
+        </div>
+
+        <div class="window-content"
+            style="display: flex; flex-direction: row; background-color: #ECE9D8; overflow: hidden;">
+            <!-- Sidebar / Search Panel -->
+            <div class="explorer-sidebar" id="explorer-sidebar">
+
+                <!-- Normal Sidebar -->
+                <div id="sidebar-tasks" style="display: block;">
+                    <div class="sidebar-box">
+                        <div class="sidebar-header">System Tasks</div>
+                        <div class="sidebar-content">
+                            <div class="sidebar-item" data-action="sys-info">View system information</div>
+                            <div class="sidebar-item" data-action="sys-programs">Add or remove programs</div>
+                            <div class="sidebar-item" data-action="sys-setting">Change a setting</div>
+                        </div>
+                    </div>
+                    <div class="sidebar-box">
+                        <div class="sidebar-header">Other Places</div>
+                        <div class="sidebar-content">
+                            <div class="sidebar-item" data-action="place-mycomp">My Computer</div>
+                            <div class="sidebar-item" data-action="place-mydocs">My Documents</div>
+                            <div class="sidebar-item" data-action="place-net">My Network Places</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Panel (Rover) -->
+                <div id="sidebar-search" style="display: none; height: 100%; position: relative;">
+                    <div class="search-pane-header">Search Companion</div>
+                    <div class="search-pane-content">
+                        <div class="rover-container">
+                            <img src="icons/rover.png" id="rover-img" alt="Rover">
+                            <div class="rover-bubble" id="rover-bubble" style="display: none;">
+                                What do you want to search for?
+                            </div>
+                        </div>
+
+                        <div class="search-form">
+                            <p>Search by any or all of the criteria below.</p>
+                            <label for="search-query">All or part of the file name:</label>
+                            <input type="text" id="search-query" style="width: 100%; margin-bottom: 10px;">
+
+                            <button id="search-btn">Search</button>
+                            <button id="search-back-btn" style="margin-top: 5px;">Back</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Main View -->
+            <div class="explorer-main" id="explorer-main">
+                <!-- Javascript will populate this -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Recycle Bin Window -->
+    <div id="recycle-bin-window" class="window" style="display: none; top: 110px; left: 110px;">
+        <div class="window-header">
+            <div class="window-title">
+                <img src="icons/recycle-bin-empty.ico" alt="Icon">
+                Recycle Bin
+            </div>
+            <div class="window-controls">
+                <button class="window-btn minimize-btn">_</button>
+                <button class="window-btn maximize-btn">[]</button>
+                <button class="window-btn close-btn">X</button>
+            </div>
+        </div>
+        <div class="window-content"
+            style="background: white; padding: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <img src="icons/recycle-bin-empty.ico" style="width: 64px; height: 64px; opacity: 0.5;" alt="Empty">
+            <p style="margin-top: 10px; color: #666;">The Recycle Bin is empty.</p>
+        </div>
+    </div>
+
+    <!-- Notepad Window -->
+    <div class="window" id="notepad-window" style="display: none; width: 600px; height: 400px; top: 60px; left: 150px;">
+        <div class="window-header">
+            <div class="window-title">
+                <img src="icons/notepad.png" alt="Icon">
+                <span>Untitled - Notepad</span>
+            </div>
+            <div class="window-controls">
+                <button class="window-btn minimize-btn">_</button>
+                <button class="window-btn maximize-btn">[]</button>
+                <button class="window-btn close-btn">X</button>
+            </div>
+        </div>
+        <div class="window-content" style="display: flex; flex-direction: column;">
+            <div class="notepad-menu-bar">
+                <div class="notepad-menu-item">
+                    <span>File</span>
+                    <div class="notepad-dropdown">
+                        <div class="notepad-dropdown-item" data-action="new">New</div>
+                        <div class="notepad-dropdown-item" data-action="open">Open...</div>
+                        <div class="notepad-dropdown-item" data-action="save">Save</div>
+                        <div class="notepad-dropdown-separator"></div>
+                        <div class="notepad-dropdown-item" data-action="exit">Exit</div>
+                    </div>
+                </div>
+                <div class="notepad-menu-item">
+                    <span>Edit</span>
+                    <div class="notepad-dropdown">
+                        <div class="notepad-dropdown-item" data-action="undo">Undo</div>
+                        <div class="notepad-dropdown-separator"></div>
+                        <div class="notepad-dropdown-item" data-action="cut">Cut</div>
+                        <div class="notepad-dropdown-item" data-action="copy">Copy</div>
+                        <div class="notepad-dropdown-item" data-action="paste">Paste</div>
+                        <div class="notepad-dropdown-item" data-action="delete">Delete</div>
+                        <div class="notepad-dropdown-separator"></div>
+                        <div class="notepad-dropdown-item" data-action="select-all">Select All</div>
+                        <div class="notepad-dropdown-item" data-action="time-date">Time/Date</div>
+                    </div>
+                </div>
+                <div class="notepad-menu-item">
+                    <span>Format</span>
+                    <div class="notepad-dropdown">
+                        <div class="notepad-dropdown-item" data-action="word-wrap">Word Wrap</div>
+                        <div class="notepad-dropdown-item" data-action="font">Font...</div>
+                    </div>
+                </div>
+                <div class="notepad-menu-item">
+                    <span>View</span>
+                    <div class="notepad-dropdown">
+                        <div class="notepad-dropdown-item" data-action="status-bar">Status Bar</div>
+                    </div>
+                </div>
+                <div class="notepad-menu-item">
+                    <span>Help</span>
+                    <div class="notepad-dropdown">
+                        <div class="notepad-dropdown-item" data-action="about">About Notepad</div>
+                    </div>
+                </div>
+            </div>
+            <textarea class="notepad-textarea" spellcheck="false"></textarea>
+        </div>
+    </div>
+
+    <!-- Run Dialog -->
+    <div class="window" id="run-window"
+        style="display: none; width: 350px; height: 180px; top: 200px; left: 200px; z-index: 10000;">
+        <div class="window-header">
+            <div class="window-title">
+                <img src="icons/terminal.ico" alt="Icon">
+                <span>Run</span>
+            </div>
+            <div class="window-controls">
+                <button class="window-btn close-btn">X</button>
+            </div>
+        </div>
+        <div class="window-content" style="padding: 15px; display: flex; flex-direction: column; background: #ECE9D8;">
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
+                <img src="icons/terminal.ico" alt="Run" style="width: 32px; height: 32px;">
+                <div style="font-size: 11px; line-height: 1.4;">
+                    Type the name of a program, folder, document, or Internet resource, and Windows will open it for
+                    you.
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
+                <label for="run-input" style="font-size: 11px;">Open:</label>
+                <input type="text" id="run-input" style="flex-grow: 1; border: 1px solid #7F9DB9; padding: 2px;">
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 5px;">
+                <button id="run-ok" style="min-width: 60px;">OK</button>
+                <button id="run-cancel" style="min-width: 60px;">Cancel</button>
+                <button id="run-browse" style="min-width: 60px;">Browse...</button>
+            </div>
+        </div>
+    </div>
     </div>
 
     <div id="start-menu" style="display: none;">
@@ -283,13 +657,31 @@
                 </div>
             </div>
             <div class="start-column right">
-                <div class="start-item" data-target="about-window">
+                <div class="start-item" data-target="explorer-window">
                     <img src="icons/my-computer.ico" alt="My Computer">
                     <span>My Computer</span>
                 </div>
                 <div class="start-item" data-target="recycle-bin-window">
                     <img src="icons/recycle-bin-empty.ico" alt="Recycle Bin">
                     <span>Recycle Bin</span>
+                </div>
+                <div class="separator"
+                    style="margin: 5px 0; border-top: 1px solid #aebcdd; border-bottom: 1px solid white;"></div>
+                <div class="start-item" onclick="window.openWindow('notepad-window')">
+                    <img src="icons/notepad.png" alt="Notepad">
+                    <span>Notepad</span>
+                </div>
+                <div class="start-item" onclick="window.openWindow('calc-window')">
+                    <img src="icons/calculator.png" alt="Calculator">
+                    <span>Calculator</span>
+                </div>
+                <div class="start-item" onclick="window.openWindow('cp-window')">
+                    <img src="icons/control-panel.png" alt="Control Panel">
+                    <span>Control Panel</span>
+                </div>
+                <div class="start-item" id="run-btn">
+                    <img src="icons/terminal.ico" alt="Run">
+                    <span>Run...</span>
                 </div>
                 <div class="start-item" data-target="terminal-window">
                     <img src="icons/terminal.ico" alt="Terminal">
@@ -325,6 +717,7 @@
         </div>
     </div>
 
+    <script src="filesystem.js"></script>
     <script src="audio-manager.js"></script>
     <script src="pacman.js"></script>
     <script src="paint.js"></script>

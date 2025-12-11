@@ -469,3 +469,390 @@ body {
     cursor: crosshair;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
+
+/* BSOD Styles */
+#bsod {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000082;
+    color: white;
+    font-family: 'Courier New', monospace;
+    z-index: 99999;
+    padding: 100px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: none;
+    display: flex;
+    justify-content: center;
+}
+
+.bsod-content {
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.bsod-content p {
+    margin-bottom: 20px;
+}
+
+/* Notepad Styles */
+.notepad-menu-bar {
+    height: 20px;
+    background-color: #ECE9D8;
+    border-bottom: 1px solid #ACA899;
+    display: flex;
+    font-size: 11px;
+    color: black;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.notepad-menu-item {
+    position: relative;
+    padding: 2px 6px;
+    cursor: default;
+}
+
+.notepad-menu-item:hover {
+    background-color: #316AC5;
+    color: white;
+}
+
+.notepad-menu-item.active {
+    background-color: #316AC5;
+    color: white;
+}
+
+.notepad-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ACA899;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    padding: 2px;
+    z-index: 100;
+}
+
+.notepad-menu-item.active .notepad-dropdown {
+    display: block;
+}
+
+/* Fix for inner dropdown items text color inheriting from parent when hovering parent */
+.notepad-menu-item:hover .notepad-dropdown {
+    color: black;
+}
+
+.notepad-menu-item.active .notepad-dropdown {
+    color: black;
+}
+
+.notepad-dropdown-item {
+    padding: 2px 15px 2px 5px;
+    /* Extra right padding for accelerators ideally */
+    cursor: default;
+}
+
+.notepad-dropdown-item:hover {
+    background-color: #316AC5;
+    color: white;
+}
+
+.notepad-dropdown-separator {
+    height: 1px;
+    background-color: #ACA899;
+    margin: 3px 2px;
+}
+
+.notepad-textarea {
+    flex-grow: 1;
+    border: none;
+    resize: none;
+    outline: none;
+    font-family: 'Lucida Console', monospace;
+    font-size: 14px;
+    padding: 2px;
+    overflow: auto;
+}
+
+/* Generic Button Styles for Dialogs */
+button {
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+}
+
+/* Explorer Styles */
+.explorer-toolbar {
+    height: 36px;
+    background-color: #ECE9D8;
+    border-bottom: 1px solid #ACA899;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.toolbar-btn {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    padding: 2px 5px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.toolbar-btn:hover {
+    border: 1px solid #ACA899;
+    background-color: #F8F8F8;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-btn:active {
+    background-color: #DDD;
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-separator {
+    width: 1px;
+    height: 24px;
+    background-color: #ACA899;
+    margin: 0 5px;
+}
+
+.toolbar-icon {
+    font-size: 16px;
+    /* In reality these would be images */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.go-btn {
+    background: url('icons/go-button.png') no-repeat center;
+    /* Mock */
+    background-color: #38A755;
+    color: white;
+    padding: 2px 5px;
+    font-size: 11px;
+    margin-left: 2px;
+    cursor: pointer;
+    border: 1px solid #1C672B;
+    border-radius: 2px;
+}
+
+.explorer-sidebar {
+    width: 200px;
+    background: linear-gradient(to bottom, #7BA2E7 0%, #6375D6 100%);
+    padding: 10px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.sidebar-box {
+    background-color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.sidebar-header {
+    background: linear-gradient(to right, #ffffff 0%, #C6D3F7 100%);
+    color: #215DC6;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.sidebar-content {
+    background-color: #D6DFF7;
+    padding: 5px 10px;
+    color: #215DC6;
+    font-size: 11px;
+}
+
+.sidebar-item {
+    padding: 2px 0;
+    cursor: pointer;
+}
+
+.sidebar-item:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.explorer-main {
+    flex-grow: 1;
+    background-color: white;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+}
+
+/* File/Folder Items in Grid */
+.file-item {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: default;
+    padding: 2px;
+    border: 1px solid transparent;
+}
+
+.file-item:hover {
+    background-color: #E8F0FF;
+    border: 1px solid #CDE0FA;
+}
+
+.file-item.selected {
+    background-color: #316AC5;
+    color: white;
+    border: 1px solid #316AC5;
+}
+
+.file-item img {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 5px;
+}
+
+.file-item span {
+    font-size: 11px;
+    word-break: break-word;
+}
+
+/* Rover Styles */
+.search-pane-header {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.search-pane-content {
+    background-color: #D6DFF7;
+    /* Light Blue */
+    color: black;
+    padding: 10px;
+    height: calc(100% - 30px);
+    overflow-y: auto;
+}
+
+.rover-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#rover-img {
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+    animation: rover-breath 3s infinite ease-in-out;
+}
+
+#rover-img:hover {
+    transform: scale(1.1);
+    animation-play-state: paused;
+}
+
+@keyframes rover-breath {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-2px) scale(1.02);
+    }
+}
+
+/* Calculator Styles */
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+}
+
+.calc-btn {
+    width: 100%;
+    height: 28px;
+    font-size: 11px;
+    font-family: 'Tahoma', sans-serif;
+    color: #000;
+    border: 1px solid #003c74;
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #fff 0%, #ece9d8 100%);
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.calc-btn:active {
+    background: #d1cfc7;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.calc-btn.text-red {
+    color: #aa0000;
+}
+
+.calc-btn.text-blue {
+    color: #0000aa;
+}
+
+/* Adjust top row to span */
+.calc-buttons>button:nth-child(1) {
+    grid-column: span 2;
+}
+
+/* Backspace */
+.calc-buttons>button:nth-child(2) {
+    grid-column: span 2;
+}
+
+/* CE */
+.calc-buttons>button:nth-child(3) {
+    grid-column: span 2;
+}
+
+/* C */
+
+.rover-bubble {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    background: #FFffe1;
+    border: 1px solid #000;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+    display: none;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.search-form {
+    font-size: 11px;
+}
+
+.search-form p {
+    margin-bottom: 10px;
+}

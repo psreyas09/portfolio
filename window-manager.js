@@ -101,17 +101,7 @@ function setupDesktopIcons() {
     icons.forEach(icon => {
         icon.addEventListener('dblclick', () => {
             const targetId = icon.dataset.target;
-            const targetWin = document.getElementById(targetId);
-            if (targetWin) {
-                targetWin.style.display = 'flex';
-                targetWin.style.zIndex = ++zIndexCounter;
-
-                const taskbarItem = document.getElementById(`task-${targetId}`);
-                if (taskbarItem) {
-                    taskbarItem.style.display = 'flex';
-                    taskbarItem.classList.add('active');
-                }
-            }
+            window.openWindow(targetId);
         });
     });
 }
@@ -161,6 +151,20 @@ function updateTaskbarActive(activeId) {
     });
 }
 
+window.openWindow = function (targetId) {
+    const targetWin = document.getElementById(targetId);
+    if (targetWin) {
+        targetWin.style.display = 'flex';
+        targetWin.style.zIndex = ++zIndexCounter;
+
+        const taskbarItem = document.getElementById(`task-${targetId}`);
+        if (taskbarItem) {
+            taskbarItem.style.display = 'flex';
+            taskbarItem.classList.add('active');
+        }
+    }
+};
+
 window.addEventListener('DOMContentLoaded', () => {
     setupWindows();
     setupDesktopIcons();
@@ -184,27 +188,13 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Helper to open window
-    function openWindow(windowEl) {
-        windowEl.style.display = 'flex';
-        windowEl.style.zIndex = ++zIndexCounter;
-        const taskbarItem = document.getElementById(`task-${windowEl.id}`);
-        if (taskbarItem) {
-            taskbarItem.style.display = 'flex';
-            taskbarItem.classList.add('active');
-        }
-    }
-
     // Start Menu Items
     document.querySelectorAll('.start-item[data-target]').forEach(item => {
         item.addEventListener('click', () => {
             const targetId = item.getAttribute('data-target');
-            const windowEl = document.getElementById(targetId);
-            if (windowEl) {
-                openWindow(windowEl);
-                startMenu.style.display = 'none';
-                startButton.style.filter = '';
-            }
+            window.openWindow(targetId);
+            startMenu.style.display = 'none';
+            startButton.style.filter = '';
         });
     });
 
